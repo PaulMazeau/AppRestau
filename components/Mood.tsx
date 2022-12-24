@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import LoginScreen from './screens/LoginScreen';
 
-export default function App() {
+export default function Mood() {
   return (
     <View style={styles.container}>
-      <LoginScreen/>
+      <Text style={styles.text}>Foncedale</Text>
+      <Text style={styles.text}>34</Text>
       <StatusBar style="auto" />
-      <Text style={styles.text}>Test</Text>
     </View>
   );
 }
@@ -17,10 +16,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    width: 100,
+    borderRadius: 25,
   },
-
   text: {
-    fontSize: 47,
+    color: '#000',
+    fontSize: 24,
+    fontWeight: 'bold',
   }
 });

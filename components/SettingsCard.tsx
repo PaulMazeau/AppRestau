@@ -1,13 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import LoginScreen from './screens/LoginScreen';
 
-export default function App() {
+export default function SettingsCard() {
   return (
     <View style={styles.container}>
-      <LoginScreen/>
+      <Text>Ceci est le composant d'une card d'un setting</Text>
       <StatusBar style="auto" />
-      <Text style={styles.text}>Test</Text>
     </View>
   );
 }
@@ -19,8 +17,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
-  text: {
-    fontSize: 47,
-  }
 });
