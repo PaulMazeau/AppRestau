@@ -1,24 +1,22 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image, Platform} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Settings from '../Icons/Settings.svg';
-import { useNavigation } from '@react-navigation/native';
 
 const ProfilImage=require('../Img/avatarHeader.png');
 //props est nom du frero + nom dla coloc + lurl de son avatar
 
-const Top = (props) => {
+const Top = () => {
     
-    const navigation =
-    useNavigation<StackNavigationProp<RootStackParams>>();
+  //  const navigation =
+   // useNavigation<StackNavigationProp<RootStackParams>>();
 
     return (
     
     <SafeAreaView style= {{backgroundColor: '#EDF0FA', paddingBottom:Platform.OS === 'android' ? 25:-25}}>
     <View style={styles.Header}>
-        <TouchableOpacity onPress={() => navigation.push('Settings')} style={styles.GlobalLeft}>
+         <TouchableOpacity onPress={() => console.log('prout1')} style={styles.GlobalLeft}> */
         <View style={styles.ImageContainer}>
-            <Image source={{uri: props.avatar, cache:'force-cache'}} style={styles.Image}/>
+            <Image source={require('../assets/icon.png')} style={styles.Image}/>
         </View>
         
         <View style={styles.Title}>
@@ -27,8 +25,8 @@ const Top = (props) => {
         </View>
         </TouchableOpacity>
         
-        <TouchableOpacity  onPress={() => navigation.push('ColocSettings')}>
-            <Settings width={25} height={25} fill="#282828"/>
+        <TouchableOpacity  onPress={() => console.log('prout')}>
+            <Text>Prout</Text>
         </TouchableOpacity>
     </View>
     </SafeAreaView>
