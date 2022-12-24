@@ -4,7 +4,7 @@ import {LinearGradient} from 'expo-linear-gradient';
 export default function RestaurantTag() {
   return (
     <View style={styles.container}>
-       <Text>Calme</Text>
+       <Text style={styles.Text}>Calme</Text>
     </View>
   );
 }
@@ -16,5 +16,9 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 10,
         padding: 5,
+        marginLeft: 5,
       },
+      Text: {
+        color: '#FFF',
+      }
 });

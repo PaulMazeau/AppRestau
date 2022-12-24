@@ -12,10 +12,14 @@ export default function RestaurantBigCard() {
             />
             <Text style={styles.Title}> Mongelli</Text>
 
-            <RestaurantTag />
-            
+            <View style={styles.LittleCard}>
+              <RestaurantTag />
+              <RestaurantTag />
+              <RestaurantTag />
+            </View>
+
                 <View style={styles.BottomCard}>
-                    <Text style={styles.Distance}> Mongelli</Text>
+                    <Text style={styles.Distance}> 16km</Text>
                     <Text style={styles.Description}> Mongelli</Text>
                 </View>
         </LinearGradient>
@@ -28,8 +32,11 @@ const styles = StyleSheet.create({
   linearGradient: {
     padding: 16,
     borderRadius: 5,
+    margin: 10,
   },
-  
+  LittleCard: {
+    flexDirection:'row',
+  },
   BottomCard: {
     flexDirection:'row',
     justifyContent:'space-between',
