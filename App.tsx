@@ -6,6 +6,7 @@ import SignUp from "./screen/SignUp";
 import HomeScreen from "./screen/HomeScreen";
 import Header from "./components/Header";
 import {firebase} from "./config";
+import MoodPicker from './screen/MoodPicker';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,7 @@ function App(){
       <Stack.Navigator
       screenOptions={{
         headerShown: false, // hide the header
+        cardStyle: { backgroundColor: '#121212' },
       }}>
         <Stack.Screen 
         name="SignIn"
@@ -44,7 +46,15 @@ function App(){
     );
   }
   return(
-    <Stack.Navigator>
+    <Stack.Navigator
+    screenOptions={{
+      headerShown: false, // hide the header
+      cardStyle: { backgroundColor: '#121212' },
+    }}>
+       <Stack.Screen 
+        name="MoodPicker"
+        component={MoodPicker}
+        />
       <Stack.Screen 
         name="HomeScreen"
         component={HomeScreen}
