@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 7,
     padding: 10,
+    height: 115,
+    width: 276,
   },
   BottomCard: {
     flexDirection:'row',

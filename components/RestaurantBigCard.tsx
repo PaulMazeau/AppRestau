@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 5,
     margin: 10,
+    height: 382,
+    width: 276,
   },
   LittleCard: {
     flexDirection:'row',

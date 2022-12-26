@@ -1,23 +1,62 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import CarrousselBigCard from './components/CarrousselBigCard';
-import CarrousselLittleCard from './components/CarrousselLittleCard';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import React, {useState, useEffect} from "react";
+import SignIn from "./screen/SignIn";
+import SignUp from "./screen/SignUp";
+import HomeScreen from "./screen/HomeScreen";
+import Header from "./components/Header";
+import {firebase} from "./config";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <CarrousselLittleCard />
-      <CarrousselBigCard />
-      <StatusBar style="auto" />
-    </View>
-  );
+const Stack = createStackNavigator();
+
+function App(){
+  const[initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  //Handle user state changes
+  function onAuthStateChanged(user: any) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+
+  useEffect(() => {
+    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber;
+  }, []);
+
+  if(initializing) return null;
+
+  if(!user){
+    return (
+      <Stack.Navigator
+      screenOptions={{
+        headerShown: false, // hide the header
+      }}>
+        <Stack.Screen 
+        name="SignIn"
+        component={SignIn}
+        />
+         <Stack.Screen 
+        name="SignUp"
+        component={SignUp}
+        />
+      </Stack.Navigator>
+    );
+  }
+  return(
+    <Stack.Navigator>
+      <Stack.Screen 
+        name="HomeScreen"
+        component={HomeScreen}
+        />
+    </Stack.Navigator>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default () => {
+  return (
+    <NavigationContainer>
+      <App/>
+    </NavigationContainer>
+  )
+}
