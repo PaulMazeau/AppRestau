@@ -3,8 +3,6 @@ import {View, Text, StyleSheet, TouchableOpacity, Image, Platform} from 'react-n
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Settings from '../assets/Icons/Settings.svg'
 
-
-
 const Header = () => {
 
     return (

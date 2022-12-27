@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, SafeAreaView } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import {firebase} from "../config";
 import BackArrow from '../assets/Icons/BackArrow.svg'
+import {auth} from '../config'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 
 export default function SignIn() {
     const navigation = useNavigation()
@@ -10,12 +11,14 @@ export default function SignIn() {
     const [password, setPassword] = useState('')
 
 
-    const SignInUser = async (email: string, password: string) => {
-        try {
-            await firebase.auth().signInWithEmailAndPassword(email, password)
-        } catch (error) {
-            alert(error.message)
-        }
+    const SignInUser = async () => {
+        signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          console.log('Sign in successful!');
+        })
+        .catch((error: Error) => {
+          console.error(error);
+        });
     }
 
     return (

@@ -1,10 +1,11 @@
 import React from 'react'
 import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import {firebase} from '../config'
 import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react';
 import BackArrow from '../assets/Icons/BackArrow.svg'
-
+import { browserLocalPersistence, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, db, storage } from '../config';
+import { doc, setDoc } from 'firebase/firestore';
 
 const SignUp = () => {
     const navigation = useNavigation()
@@ -14,28 +15,21 @@ const SignUp = () => {
     const [lastName, setLastName] = useState('')
 
     const SignUpUser = async (email: string, password: string, firstName: string, lastName: string) => {
-        await firebase.auth().createUserWithEmailAndPassword(email,password)
-        .then(() => {
-            firebase.auth().currentUser?.sendEmailVerification({
-                handleCodeInApp: true,
-                url: 'https://restau-85b72.firebaseapp.com',
-            })
-            .then(() => {
-                alert('Verification email sent')
-            }).catch((error)=>{
-                alert(error.message)
-            })
-            .then(() => {
-                firebase.firestore().collection('user')
-                .doc(firebase.auth().currentUser?.uid)
-                .set({
-                    firstName,
-                    lastName,
-                    email,
-                })
-            })
-            .catch((error) => alert(error.message) )
-        })
+        createUserWithEmailAndPassword(auth, email, password).then(function(userCred) {
+            // get user data from the auth trigger
+            const userUid = userCred.user.uid; // The UID of the user.
+            // set account  doc  
+            const entry = {
+              prenom: firstName,
+              nom: lastName,
+              uuid: userUid,
+            }
+            navigation.navigate('HomeScreen')
+           setDoc(doc(db, 'Users', userUid),entry); 
+          }).catch((error) => {
+           console.log('proututtutuutughgzreohior')
+          });
+        
     }
 
     return (
@@ -111,7 +105,7 @@ const SignUp = () => {
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPress={() => navigation.navigate('SignIn')}
+                onPress={() => console.log('prout')}
                 style={styles.button2}
             >
                 <Text style={styles.txtBtn2}>Already have an account? Sign Up now</Text>

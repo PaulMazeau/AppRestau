@@ -1,23 +1,21 @@
 import React from 'react'
-import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import {firebase} from '../config'
+import { StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native';
 import CarrousselBigCard from '../components/CarrousselBigCard';
 import CarrousselLittleCard from '../components/CarrousselLittleCard';
 import { useNavigation } from '@react-navigation/native'
 import ButtonMood from '../components/ButtonMood';
 import Header from '../components/Header';
-
+import firebase from 'firebase/compat';
 
 export default function HomeScreen() {
 
     const navigation = useNavigation()
-    const user = firebase.auth().currentUser;
-
 
     return (
         <View style={styles.container}>
             <Header />
+            <Text style={styles.title}>Nom: </Text>
             <Text style={styles.title}>Top 10 des restaurants à Lyon</Text>
             <CarrousselLittleCard />
             <Text style={styles.title}>Selon ton mood</Text>

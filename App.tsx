@@ -5,8 +5,10 @@ import SignIn from "./screen/SignIn";
 import SignUp from "./screen/SignUp";
 import HomeScreen from "./screen/HomeScreen";
 import Header from "./components/Header";
-import {firebase} from "./config";
 import MoodPicker from './screen/MoodPicker';
+import { auth,db } from './config.js';
+import { getDoc, doc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const Stack = createStackNavigator();
 
@@ -14,18 +16,17 @@ function App(){
   const[initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
-  //Handle user state changes
-  function onAuthStateChanged(user: any) {
-    setUser(user);
-    if (initializing) setInitializing(false);
-  }
+//Handle user state changes
+function onAuthStateChanged(user: any) {
+  setUser(user);
+  if (initializing) setInitializing(false);
+}
 
-  useEffect(() => {
-    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber;
-  }, []);
+useEffect(() => {
+  const subscriber = onAuthStateChanged(onAuthStateChanged);
+  return subscriber;
+}, []);
 
-  if(initializing) return null;
 
   if(!user){
     return (
@@ -41,6 +42,10 @@ function App(){
          <Stack.Screen 
         name="SignUp"
         component={SignUp}
+        />
+        <Stack.Screen 
+        name="HomeScreen"
+        component={HomeScreen}
         />
       </Stack.Navigator>
     );

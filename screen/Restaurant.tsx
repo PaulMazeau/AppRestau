@@ -1,10 +1,16 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
 export default function Restaurant() {
-        return (
-            <View>
-                <Text> Ceci est la page restaurant</Text>
-            </View>
-        )
+    return (
+        <View>
+            <Text style={styles.text}>Page restau</Text>
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    text:{
+        color: 'black'
     }
+})
